@@ -185,10 +185,25 @@ void remove(Node* &tree,const int &val){
 
 `Rotation`
 * Rotation is a local change involving only three pointers and two nodes
-![alt text](Image/Tree_rotate.png)
+
+<img src="Image/tree_rotate.png" width="600">
+`Insert / Four cases`
+1. Single left rotation: RL(a) , Rotate Left
+2. Single right rotation: RR(a)
+
+<img src="Image/single_rotate.png" width="600">
+
+4. Double rotation right-left: RR(c), RL(a)
+
+<img src="Image/double_rotate1.png" width="600">
+
+6. Double rotation left-right RL(a), RR(c)
+
+<img src="Image/double_rotate2.png" width="600">
 
 
-![alt text](1280px-Tree_Rebalancing.gif)
+
+<img src="1280px-Tree_Rebalancing.gif" width="600">
 
 
 
