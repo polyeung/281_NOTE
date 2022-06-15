@@ -227,8 +227,15 @@ Algorighm checkAndBalance(Node* n){
 
 
 
-
-
+##### Algorithm Family
+Algorithm | Note
+--- | ---
+Brute Force|Guarantees optimality. `But it is slow`
+Greedy | pick the next best option- `not gurantess to be optimal`
+Divide and Conquer | Combining solutions to subproblems( e.g mergesort)
+Backtracking | constraint satisfaction problems. `satisfying constraints is not necessarily optimal`
+Branch and Boung | Optimization problems
+Dynamic Programming | Save answers to overlapping subproblems to optimize time complexity (optimize brute force)
 
 
 
