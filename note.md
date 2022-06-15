@@ -185,7 +185,10 @@ void remove(Node* &tree,const int &val){
 
 `Rotation`
 * Rotation is a local change involving only three pointers and two nodes
-![alt text](http://url/to/img.png)
+
+
+
+![alt text](1280px-Tree_Rebalancing.gif)
 
 
 
