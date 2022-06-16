@@ -241,6 +241,13 @@ Dynamic Programming | Save answers to overlapping subproblems to optimize time c
 
 
 
+## String and Sequence
+* .size() for c string is O(n), 
+*  there are two pointers at the begin and end of c++ string, so .size() is O(1), `.end() - .begin()`
+
+#### std::equal
+* ra and rad are equal
+* 
 
 
 
