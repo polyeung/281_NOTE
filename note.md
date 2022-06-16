@@ -247,7 +247,25 @@ Dynamic Programming | Save answers to overlapping subproblems to optimize time c
 
 #### std::equal
 * ra and rad are equal
-* 
+
+````C++
+bool isPalindrome(string s){
+ return std::equal(begin(s),begin(s)+s.size()/2,rbegin(s));
+}
+````
+* after C++ 11, string object has ptr points to the beginning of string, and a size variable
+* locality is better as ptr, size, string are all contigous in memory
+
+#### String compare O(n), n is the length of shortest string
+* if str1.len() < str2.len() -> return -1, else return 1
+*  compare common area, if char1 < char2 - > return -1, vice versa
+*  same -> return 0;
+
+`constexpr`
+* constant at complie time 
+*
+## Review the fingerprints 
+
 
 
 
