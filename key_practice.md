@@ -1,4 +1,4 @@
-* TODO: additional: #7 #31 #35
+* TODO: additional: #7 #31 #35 #40 #41
 * rand function is not a good hash function as the same key will hash to different location
 * map insert take O(log n), as it uses bst as the container under the hood
 * hash table may not be better than vector when the `key is sequential`
@@ -12,4 +12,15 @@
     3.the performance of quadratic probing can deteriorate dramatically as the load factor increases
 * load factor = #occupied / #buckets (don't count the deleted element)
 * separate chaining hash table can have `load factor > 1`
+
+* Returns the number of internal node
+````C++
+else if(!root->left && !root->right){return 0;}
+````
+
+* Returns the number of all nodes
+````C++
+else if(!root->left && !root->right){return 1;}
+````
+* preorder and post order are not enough to determine the bst
 * 
