@@ -1,4 +1,4 @@
-* TODO: additional: #7 #31 #35 #40 #41
+* TODO: additional: #7 #31 #35 #40 #41 #58 tripple rotation
 * rand function is not a good hash function as the same key will hash to different location
 * map insert take O(log n), as it uses bst as the container under the hood
 * hash table may not be better than vector when the `key is sequential`
@@ -23,4 +23,4 @@ else if(!root->left && !root->right){return 0;}
 else if(!root->left && !root->right){return 1;}
 ````
 * preorder and post order are not enough to determine the bst
-* 
+*  balance from the toppest unbalance node????? // TODO
