@@ -1,4 +1,4 @@
-* TODO: additional: #7 #31 #35 #40 #41 #58 tripple rotation
+* TODO: additional: #7 #31 #35 #40 #41 #58 tripple rotation #63
 * rand function is not a good hash function as the same key will hash to different location
 * map insert take O(log n), as it uses bst as the container under the hood
 * hash table may not be better than vector when the `key is sequential`
