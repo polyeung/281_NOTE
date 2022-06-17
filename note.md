@@ -70,6 +70,17 @@ can have load factor > 1 | Cache locality improves runtime
 `Fast insert and delete in middle of list ` | `can random access`
 
 
+### unordered_map vs. ordered_map
+---|Unordered_map | ordered_map
+--- | --- | ---
+container | hash table(vector with struct) | `AvL Tree`
+search time | O(log(n)) | Average O(1), worst : O(n)
+Insertion time  | log(n) + Rebalance  | Average O(1), worst : O(n)          
+Deletion time   | log(n) + Rebalance  | Average O(1), worst : O(n)
+
+
+
+
 ### Tree Fundamentals
 
 Simple Tree | Rooted Tree
