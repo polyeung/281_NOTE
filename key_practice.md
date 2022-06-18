@@ -24,3 +24,8 @@ else if(!root->left && !root->right){return 1;}
 ````
 * preorder and post order are not enough to determine the bst
 *  balance from the toppest unbalance node????? // TODO
+
+* both prim's and Kruskal's algorithms fail to work on directed graph
+*  kruskal's and prim's algorithm both work on graph `with negative edge`
+*  For the graph with two or more edges with same length, prim and kruskal mal produce different MST
+*  
