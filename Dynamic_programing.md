@@ -71,6 +71,50 @@ use dp, vector<bool> memo. from back to the start and check whether ecery node's
     
     return lastGoodIndex == 0;
  ````                           
-                                              
+
+ `//leetcode 1155 throw dice to target sum`
+ 
+ #### memo (suppose 6 faces)
+ sum | 1 | 2 | 3 | 4 |5 |6 |7 |8
+ --- | --- | --- | --- | --- | --- | --- | --- | ---
+ 0 dice| 0 | 0 | 0 | 0 | 0 | 0|0 | 0
+ 1 dice | 1| `1` | `1 `|`1` |`1 `|`1` | `0` | 0
+ 2 dice | 0 | 1 | 2 | 3 |4 |5 | 6 | `5` | 4
+  
+ 
+ `Tips` : 
+ For every element in row, sum all upper left numbers(within the range all faces)
+ 
+ For example, for highlighted number 5(target sum 9), we cannot roll from 1 dice target sum 7 as #cases is 0.
+ but we can roll from 1 dice target sum 6 and roll another dice as 2, #cases is 1. sum up all cases resulting in 5
+ 
+ ````C++
+ int numRollsToTarget(int n, int k, int target) {
+        const size_t num_row = size_t(n+1); const size_t num_col = size_t(target+1);
+    vector<vector<long long int>> memo(num_row, vector<long long int>(num_col,0));
+    
+    //base case initialize the 1 dice situation
+    for(int col = 1;col < min(k+1,static_cast<int>(num_col));col++){
+        //for one dice, there is only 1 way for given number within the range
+        memo[1][col] = 1;
+    }
+    
+    //start from the row index 2
+    for(int i = 2;i < num_row;i++){
+        for(int j = 1;j < num_col;j++){
+            //for each element sumation all situation
+            for(int x = 1; x <= k && x < j; x++){
+                memo[i][j] += memo[i-1][j-x];
+            }//for each possibility
+            
+        }//col
+        
+    }//row
+    
+    
+    //result is at the right bottom conenr
+    return memo[n][target];
+    }
+ ````
                                              
  
