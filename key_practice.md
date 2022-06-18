@@ -1,4 +1,4 @@
-* TODO: additional: #7 #31 #35 #40 #41 #58 tripple rotation #63
+* TODO: additional: #7 #31 #35 #40 #41 #58 tripple rotation #63 #71
 * rand function is not a good hash function as the same key will hash to different location
 * map insert take O(log n), as it uses bst as the container under the hood
 * hash table may not be better than vector when the `key is sequential`
@@ -28,4 +28,6 @@ else if(!root->left && !root->right){return 1;}
 * both prim's and Kruskal's algorithms fail to work on directed graph
 *  kruskal's and prim's algorithm both work on graph `with negative edge`
 *  For the graph with two or more edges with same length, prim and kruskal mal produce different MST
-*  
+
+`Adjacency list`
+A -> B -> C means that A has direct connect with B and C, `does not mean that B has direct connect with C`
