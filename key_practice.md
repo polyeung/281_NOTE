@@ -1,4 +1,4 @@
-* TODO: additional: #7 #31 #35 #40 #41 #58 tripple rotation #63 #71
+* TODO: additional: #7 #31 #35 #40 #41 #58 tripple rotation #63 #71 #79 #89 #90
 * rand function is not a good hash function as the same key will hash to different location
 * map insert take O(log n), as it uses bst as the container under the hood
 * hash table may not be better than vector when the `key is sequential`
@@ -31,3 +31,17 @@ else if(!root->left && !root->right){return 1;}
 
 `Adjacency list`
 A -> B -> C means that A has direct connect with B and C, `does not mean that B has direct connect with C`
+
+* elementary sorts are all greedy. Insertion, bubble, selection
+*  Kruskal's Prim's Dikstra's Algorithm are all greedy
+*  `Unlike backtracking` branch and bound can be used to find an optimal solution to a problem
+*  branch and bound does not prunes solutions that do not work(`you will never know whether this solution works or not untill the end`) but prune the less optimal solution
+
+`TSP Heuristics`
+1. Heuristics are algorithms that `can not` be used to calculate an optimal solution very quickly
+2. Heuristics often have time complexities much faster than that of brute force
+3. Heuristics are extermely useful if the standard method for solving a problem takes too long
+4. Heuristics can be used to estimate an upper-bound to a TSP problem
+
+
+
