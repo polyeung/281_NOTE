@@ -1,4 +1,4 @@
-`#climbing stairs, Leetcode 70`
+## climbing stairs, Leetcode 70
 ````C++
  int climbStairs(int n) {
         if(n == 0 || n == 1){return 1;}
@@ -15,7 +15,7 @@
 };
 ````
 
-`#can jump out leetcode 55`
+## can jump out leetcode 55
 
 * method I;(Problematic). 
 times: < O(n*nums.size()), space: O(n)
@@ -116,9 +116,14 @@ use dp, vector<bool> memo. from back to the start and check whether ecery node's
     return memo[n][target];
     }
  ````
-                                             
- `LeetCode 72 Edit distance`
- <img width="474" alt="image" src="https://user-images.githubusercontent.com/81163933/174463563-5eb5d62e-b952-46ec-96b5-6c2f08aad64b.png">
+      
+ 
+ 
+ ## LeetCode 72 Edit distance
+ 
+ 
+ 
+ <img width="520" alt="image" src="https://user-images.githubusercontent.com/81163933/174463563-5eb5d62e-b952-46ec-96b5-6c2f08aad64b.png">
 
  Suppose we want to convert s1 = bunny to s2 = banana
  
@@ -137,4 +142,30 @@ use dp, vector<bool> memo. from back to the start and check whether ecery node's
  3. From [1][2], we already know number of convertion from b to ba, for bu to ba, we can add 1 deletion, after we convert `b`u to `ba`u, we simply delete u and get ba.
  
  ````C++
+ int minDistance(string word1, string word2) {
+    if(word1.empty()){return static_cast<int>(word2.size());}
+    if(word2.empty()){return static_cast<int>(word1.size());}
+    
+    vector<vector<int>> memo(word1.size() + 1, vector<int>(word2.size() + 1,0));
+    //initialize the base case
+    for(int col = 1; col < word2.size()+1;col++ ){
+        memo[0][col] = col;
+    }
+    for(int row = 1; row < word1.size()+1;row++ ){
+        memo[row][0] = row;
+    }
+    
+    //traverse through the memo
+    for(size_t i = 1;i < word1.size() + 1;i++){
+        for(size_t j = 1;j < word2.size() + 1; j++){
+            if(word1[i-1] == word2[j-1])
+                memo[i][j] = min({memo[i-1][j] + 1,memo[i-1][j-1],memo[i][j-1] + 1});
+            else
+                memo[i][j] = 1 + min({memo[i-1][j],memo[i-1][j-1],memo[i][j-1]});
+        }//for
+    }//for
+    
+    return memo[word1.size()][word2.size()];
+    
+}
  ````
