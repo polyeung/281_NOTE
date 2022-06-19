@@ -49,4 +49,4 @@ A -> B -> C means that A has direct connect with B and C, `does not mean that B 
 * Top-down dynamic programming only computes the answers to subproblems that are needed
 * Bottom-up dynamic programming can be used any time top=down dynamic programming is used.
 
-
+* Divide and conquer algorithm divides the problem into subproblems and combines those solutions to find the solution to the original problem. However, dynamic programming does not solve the subproblems independently.
