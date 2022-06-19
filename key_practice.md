@@ -43,5 +43,10 @@ A -> B -> C means that A has direct connect with B and C, `does not mean that B 
 3. Heuristics are extermely useful if the standard method for solving a problem takes too long
 4. Heuristics can be used to estimate an upper-bound to a TSP problem
 
+* branch and bound is not gruaranteed to be faster compared with the brute force especially when the sample size is small and the promissing function may cause more time.
+* Dynamic programming `can not` be used to solve a problem that can also be solved using divide and conquer. because divide and conquer is for no overlapping subproblem but dynamic programing is for subproblems that have overlap.
+
+* Top-down dynamic programming only computes the answers to subproblems that are needed
+* Bottom-up dynamic programming can be used any time top=down dynamic programming is used.
 
 
