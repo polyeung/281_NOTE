@@ -45,3 +45,71 @@ for (auto &p1 : points) {
 return count;
 }
 ````
+
+## Leetcode 752. open the lock
+
+we have a helper function that can return all sequences that can be attained in a single turn from the original sequence orig_seq.
+
+`Idea:`
+        
+1.try different combination using DFS, we start at "0000"
+2. using unordered_set<string> dead_end and visited to check whether we reach the dead end and mark sequence as visited.
+
+`Mistakes I made`
+1. we can not check the dead end in the innest for loop and return -1. if we do so, we have not tried all possiblities in that layer, simply             drop that solution and don't push to the queue if it has been visited or it is dead end
+ 2. we need cur_layer_size variable to make sure we look into every sequences within same layer in one pass of while loop
+ 
+````C++
+        vector<string> single_turn_seqs(string orig_seq) {
+         vector<string> result;
+        for (int i = 0; i < 4; ++i) {
+             string temp = orig_seq;
+             temp[i] = (orig_seq[i] - '0' + 1) % 10 + '0';
+            result.push_back(temp);
+            temp[i] = (orig_seq[i] - '0' - 1 + 10) % 10 + '0';
+            result.push_back(temp);
+    }
+    return result;
+        }
+int openLock(vector<string>& deadends, string target) {
+    unordered_set<string> dead(deadends.begin(),deadends.end());
+    unordered_set<string> visited;
+    queue<string> my_q; // dfs
+    int result = 0;
+    my_q.push("0000");
+    
+    if(dead.find("0000") != dead.end()){return -1;}
+    
+    while(!my_q.empty()){
+        size_t cur_layer_size = my_q.size();
+        
+        for(size_t i = 0;i < cur_layer_size;i++){
+            string cur_s = my_q.front();
+            my_q.pop();
+            //target?
+            if(cur_s == target){return result;}
+
+            auto possible = single_turn_seqs(cur_s);
+            
+            //for all possible sequences, check visited? then check deadend? if not result++
+            for(auto &i: possible){
+                
+                //visited?
+                if(visited.find(i) == visited.end()
+                   && dead.find(i) == dead.end()){
+                    visited.insert(i); //mark as visited
+                    my_q.push(i);
+                }
+                        
+            }//for
+        }//current layer for
+
+        result++;
+        
+    }//while
+    
+    return -1;
+    
+}
+````
+        
