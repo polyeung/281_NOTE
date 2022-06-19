@@ -117,4 +117,24 @@ use dp, vector<bool> memo. from back to the start and check whether ecery node's
     }
  ````
                                              
+ `LeetCode 72 Edit distance`
+ <img width="474" alt="image" src="https://user-images.githubusercontent.com/81163933/174463563-5eb5d62e-b952-46ec-96b5-6c2f08aad64b.png">
+
+ Suppose we want to convert s1 = bunny to s2 = banana
  
+ ![IMG_0890](https://user-images.githubusercontent.com/81163933/174463556-0ca55c4f-b418-4226-ab0a-b81b02955840.jpg)
+
+ * index means that how many characters I take from that string
+ * suppose i = 2, j = 2, that block means number of  ways I have to convert string "bu" to string "ba"
+ * Two cases: 
+  1.s2[j] == s1[i] ->  memo[i][j] = min(memo[i-1][j-1], memo[i-1][j] + 1, memo[i][j-1] + 1);
+  2.s2[j] != s1[i] -> memo[i][j] = min(memo[i-1][j-1] + 1, memo[i-1][j] + 1, memo[i][j-1] + 1);
+ 
+ For example: 
+ Suppose we are at [2][2], we want to calculate number of convertions from "bu" to "ba", 
+  1.From [1][1], we already know number of convertion from b to b, for b to ba, we can add 1 insertion to insert a and thus need +1
+  2.From [2][1], we already know number of convertion from bu to b, for bu to ba, we can add 1 insertion to insert a after we convert bu to b and thus    need +1
+ 3. From [1][2], we already know number of convertion from b to ba, for bu to ba, we can add 1 deletion, after we convert `b`u to `ba`u, we simply delete u and get ba.
+ 
+ ````C++
+ ````
