@@ -1,4 +1,4 @@
-`# 1029 two city scheduling`
+## 1029 two city scheduling
 greedy method: sort the vector based on the difference of Cost_cityB - cost_cityA
 
 smaller number should send to cityB as their city B cost are smaller than city A cost compared with others
@@ -24,7 +24,7 @@ int twoCitySchedCost(vector<vector<int>>& costs) {
     }
 ````
 
-`# count number of rectangle, eecs281 question`
+## count number of rectangle, eecs281 question
 
 <img width="800" alt="image" src="https://user-images.githubusercontent.com/81163933/174462110-b9639612-abba-4bf0-a411-1199a8102adb.png">
 
