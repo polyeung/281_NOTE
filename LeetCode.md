@@ -112,4 +112,59 @@ int openLock(vector<string>& deadends, string target) {
     
 }
 ````
+               
+## Leetcode 743 Network Delay time
+                                                 
+* Idea : using dijstra's algorithm
+* using min-heap , priority queue, need dist vector to record all distance to that nodes, need hash map to search for certain edges
+
+````C++
+  //   total length | node
+//
+int networkDelayTime(vector<vector<int>>& times, int n, int k) {
+    priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> my_q;
+    unordered_map<int, vector<pair<int,int>>> my_map;
+    vector<int> dist(n + 1, std::numeric_limits<int>::max());
+    
+    for(auto & i: times){
+        my_map[i[0]].push_back(make_pair(i[1],i[2]));
+    }
+    
+    dist[k] = 0;
+    my_q.push(make_pair(0,k));//start from number k
+    
+    while(!my_q.empty()){
+        int cur_node = my_q.top().second;
+        my_q.pop();
         
+        //find for this cur_node, find and update all reachable nodes
+        
+        for(auto it = my_map[cur_node].begin(); it != my_map[cur_node].end();++it){
+            //new_length to add = it->second
+            //new_node  = it->first
+            
+            int new_node = it->first; int new_length_to_add = it->second;
+            
+            if(dist[cur_node] + new_length_to_add < dist[new_node]){
+                dist[new_node] = dist[cur_node] + new_length_to_add;
+                my_q.push(make_pair(dist[new_node],new_node));
+            }
+            
+        }
+    }
+    
+    //find max distance
+    int max = numeric_limits<int>::min();
+    
+    for(size_t i = 1;i < dist.size();i++){if(dist[i] > max){max = dist[i];}}
+    
+    if(max == numeric_limits<int>::max())
+        return -1;
+    else
+        return max;
+  
+        
+}              
+````
+                
+     
