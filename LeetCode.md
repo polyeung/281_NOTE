@@ -166,5 +166,25 @@ int networkDelayTime(vector<vector<int>>& times, int n, int k) {
         
 }              
 ````
+
+## Zero Sum Game 0. 281  problem
+![IMG_1D14B45E67DD-1](https://user-images.githubusercontent.com/81163933/174652052-b9ae94a3-5907-4cd4-a87f-6751c00190de.jpeg)
+
+* Idea: using hase_set to record the trends of the cumulative sum of sequence, if there are two points a and b that cumulative sum are the same, this means that the sequence between point a and point b must be zero
+````C++
+                bool zero_contiguous_sum(vector <int> &nums){
+                        if(nums.empty()){return false;}
+                        
+                        unordered_set <int> my_set;
+                        int cur_sum = 0;
+                        my_set.insert(cur_sum);
+                        for(auto &i : nums){
+                                cur_sum += i;
+                                if(my_set.find(cur_sum) != my_set.end()){return true; //same cumulative sum point found}
+                                else{my_set.insert(cur_sum);}
+                        }
+                return false;
                 
+                }
+````
      
