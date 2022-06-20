@@ -187,4 +187,43 @@ int networkDelayTime(vector<vector<int>>& times, int n, int k) {
                 
                 }
 ````
+                
+                
+## 128. Generate Parentheses
+                
+* Method I: back tracking.
+                
+* Mistakes I have: when doing recursive function you can do func(a + 1) but not func(++a). You are not really increasing this element, but rather make    it seems like increasing from the perspective of next recursive function.(pass the increased value in but not modify value from current function)
+                
+````C++
+void back_track(vector<string> &result,string cur, int num_L,int num_R, int size){
+        //base case
+        if(cur.size() == size*2){
+            result.push_back(cur);
+            return;
+        }
+        
+        //decision  I have
+        if(num_L < size){
+            //add a Left parentheses
+            back_track(result,cur+'(',num_L+1,num_R,size);
+        }
+        
+        if(num_L > num_R){
+            //add a right parentheses
+ 
+            back_track(result,cur+')',num_L,num_R + 1,size);
+        }
+    
+    }
+    
+    
+    vector<string> generateParenthesis(int n) {
+        vector<string> my_vec;
+        back_track(my_vec,"",0,0,n);
+        return my_vec;
+    }                
+````
+                
+                
      
