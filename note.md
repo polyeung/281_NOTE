@@ -321,6 +321,13 @@ checknode(v): called only if partial solution is both promising and not a soluti
 4. A partial solution is pruned if its cur_cost >= best_cost, if the cost of a partial solution is too big, then `drop this partial solution`
   eg. the length of a path or tour
 
+`lowerbound()`
+* Estimate of soluiton based upon
+* should be more optimistic so that no possible solution is left behind
+* cost so far, plus `Under` estimate of cost remaining
+
+
+
 General From
 ````C++
 Algorithm checknode(Node v,Best currBest){
