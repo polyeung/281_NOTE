@@ -214,4 +214,82 @@ int longestArithSeqLength(vector<int>& nums) {
     
     
 }
+                                    
+````
+## Leet code 542 Nearest 0,
+Method I : DP
+                                    
+````C++
+vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
+        
+         vector<vector<int>> memo(mat.size(),vector<int>(mat[0].size(),-1));
+    
+        for(size_t i = 0; i < mat.size();i++){
+            for(size_t j =0 ;j <  mat[i].size();j++){
+                if(mat[i][j] == 0){memo[i][j] = 0;continue;}
+                else{
+                    int dist = numeric_limits<int>::max();
+                    //north
+                    
+                    if(i - 1 >=0){
+                        if(memo[i-1][j] != -1 )
+                            dist = min(dist,memo[i-1][j] + 1);
+                    }
+                    
+                    if(j-1 > 0){
+                        if(memo[i][j-1] != -1 )
+                            dist = min(dist,memo[i][j-1] + 1);
+                    }
+                    
+                    if(i + 1 < mat.size()){
+                        if(memo[i+1][j] != -1 )
+                            dist = min(dist,memo[i+1][j] + 1);
+                    }
+                    
+                    if(j+1 < mat[i].size()){
+                        if(memo[i][j+1] != -1 )
+                            dist = min(dist,memo[i][j+1] + 1);
+                    }
+                    
+                    memo[i][j] = dist;
+           
+                    
+                }
+            }
+        }
+            return memo;
+        }
+````
+
+* Method II: DFS
+ ````C++
+ vector<vector<int>> distance_to_zero(vector<vector<int>> &matrix) {
+vector<vector<int>> dir = { {1, 0}, {0, 1}, {0, -1}, {-1, 0} };
+queue<pair<int, int>> bfs;
+int m = matrix.size(), n = matrix[0].size();
+vector<vector<int>> dist(m, vector<int>(n, -1));
+for (int i = 0; i < m; ++i) {
+for (int j = 0; j < n; ++j) {
+if (matrix[i][j] == 0) {
+bfs.push({i, j});
+dist[i][j] = 0;
+}
+}
+}
+while (!bfs.empty()) {
+pair<int, int> current = bfs.front();
+bfs.pop();
+for (vector<int> &offset : dir) {
+int r = current.first + offset[0];
+int c = current.second + offset[1];
+if (!(r == m || c == n || r < 0 || c < 0) && dist[r][c] == -1) {
+bfs.push({r, c});
+dist[r][c] = dist[current.first][current.second] + 1;
+}
+}
+}
+return dist;
+}
  ````
+ 
+                      
