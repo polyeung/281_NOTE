@@ -54,3 +54,7 @@ A -> B -> C means that A has direct connect with B and C, `does not mean that B 
 * 1. dikstra's can not work with edges where some of them are negative but some of them are positive
 * 2. if all edges are positive, dikstra can find the minimum route
 * 3. if all edges are negative, dikstra can find the route whose value is less negative( -1 is less negative than -2)
+
+
+*  Kruskal's Prim's Dikstra's Algorithm are all greedy
+*  `Minimum number of nodes in AVL tree with height H` : O(H) = O(H-1) + O(H-2) + 1, O(H) is the minimum number of nodes in AVL tree with height H
