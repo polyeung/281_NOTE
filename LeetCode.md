@@ -119,6 +119,7 @@ int openLock(vector<string>& deadends, string target) {
 * using min-heap , priority queue, need dist vector to record all distance to that nodes, need hash map to search for certain edges
 
 ````C++
+                
   //   total length | node
 //
 int networkDelayTime(vector<vector<int>>& times, int n, int k) {
@@ -225,5 +226,44 @@ void back_track(vector<string> &result,string cur, int num_L,int num_R, int size
     }                
 ````
                 
-                
-     
+##  Programming : Range Queries (281)
+![IMG_E5B9C8E74909-1](https://user-images.githubusercontent.com/81163933/174868036-2dbb4241-3232-4900-9c09-d1893ece0046.jpeg)
+* Idea : using hashmap to record how many times each number appear at each position of data vector, this can reduce complexity 
+````C++
+                void my_range_queries(const vector<unsigned int> &data,
+                      const vector<Query> &queries){
+    //creating hash map need O(N^2) time
+    
+    //step 1, create hash_map: preprocessing
+    unordered_map <int,vector<int>> my_map;
+    for(size_t i = 0;i < data.size();i++){
+        //current we deal with data[i]
+        if(my_map.find(data[i]) != my_map.end()){continue;}
+        auto &vec = my_map[data[i]];
+        
+        vec.resize(data.size(),2);
+    
+        int count = 0;
+        for(int j = 0;j< data.size();j++){
+            if(data[j] == data[i]){count++;}
+            vec[j] = count;
+        }
+    }
+    
+    //step 2 query
+    for(auto& s: queries){
+        if(my_map.find(s.id) == my_map.end())
+            cout << "0 ";
+        else
+            if(s.start == 0){
+                cout << my_map[s.id][s.end] << " ";}
+            else{
+            cout << my_map[s.id][s.end] - my_map[s.id][s.start] << " ";
+            }
+    }
+    
+    
+    
+}
+````
+
