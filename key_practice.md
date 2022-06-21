@@ -50,3 +50,7 @@ A -> B -> C means that A has direct connect with B and C, `does not mean that B 
 * Bottom-up dynamic programming can be used any time top=down dynamic programming is used.
 
 * Divide and conquer algorithm divides the problem into subproblems and combines those solutions to find the solution to the original problem. However, dynamic programming does not solve the subproblems independently.
+
+* 1. dikstra's can not work with edges where some of them are negative but some of them are positive
+* 2. if all edges are positive, dikstra can find the minimum route
+* 3. if all edges are negative, dikstra can find the route whose value is less negative( -1 is less negative than -2)
