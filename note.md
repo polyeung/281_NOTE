@@ -235,13 +235,106 @@ Algorighm checkAndBalance(Node* n){
 }
 ````
 
-#### 
+## GRAPH
+
+* MST is lowest-cost sub-graph that: 1. includes all nodes in a graph 2. Keeps all nodes connected
+* Two algorithms to find MST:
+  `Prim`: iteratively adds closest node to current tree - very similar to Dijkstra, O(V^2) or O(ElogV)
+  `Kruskal`: iteratively builds forest by adding minimal edges, O(ElogV)
+
+* For dense G, use the nested-loop Prim variant
+* For sparse G, Kruskal is faster
+  Kruskal relies on the efficiency of sorting algorithms
+  also relies on the efficiency of union-find.
+
+
+ ## Alogorithm
+ 
+ #### Brute Force
+ 1. solve problem in simplest way
+ 2. Generate entire solution set, pick best
+ 3. will give `optimal solution` with poor efficiency
+
+#### Greedy
+1. make local, best decision, and don't look back(once decided, can not regret)
+2. `may` give optimal solution with 'better' efficiency
+3. may not produce the global-optimal solution
+
+#### Diveide and Conquer Algorithms
+Definition : Divide a problem solution into two or more smaller problems, preferably of equal size
+1. often recursive
+2. often involve log n complexity
+
+Eg.: Binary search of sorted list
+     quicksort
+
+pros : 
+1. efficiency
+2. 'Elegance ' of recursion
+
+cons : 
+1. Recursive calls to small subdomains often expensive
+2. Some times dependent upon initial state of subdomains (eg. binary search requires sorted array)
+
+#### Combind and Conquer
+Definition : start with smallest subdomain possible. Then combine increasingly larger subdomains until size = n.
+eg.; merge sort
+
+Divide and Conquer: Top down 
+Combine and conquer: Bottom up
+
+
+## Dynamic Programming
+1.similar to divide and conquer, but used for `overlapping` subspaes.
+2. used when partial solutions are needed later
+3. often times looking "nearby" for previously calculated values
+
+## Backtracking Algorithm
+1. constraint satisfaction problems
+2. allows pruning of branches that are not promising
+3. most difficult part is determining nature of promising
+
+General From:
+````C++
+Algorithm checknode(node v){
+  if(promising(v))
+    if(solution(v))
+        write solution
+     else
+        for each node u adjacent to v
+          checknode(`u`)
+
+
+}
+````
+`Note`
+solution(v) : check 'depth' of solution(constraint satisfaction)
+promising(v): pruning , whether it is promissing to be a solution
+checknode(v): called only if partial solution is both promising and not a solution (on the way of checking whether it is solution, should be promissing )
 
 
 
+## Branch and Bound Algorithm
+1. for optimization problems, must satisfy all constraints
+2. must minimize an objective function subject to those constraints
+3. the idea of backtracking `extended` to optimization problems
+4. A partial solution is pruned if its cur_cost >= best_cost, if the cost of a partial solution is too big, then `drop this partial solution`
+  eg. the length of a path or tour
 
-
-
+General From
+````C++
+Algorithm checknode(Node v,Best currBest){
+  Node u
+  if(promissing(v,curBest))
+    if(solution(v)) then
+        update(currBest)
+     else
+        for each child u of v
+           checknode(u,currBest)
+           
+  return currBest
+}
+````
 
 
 
