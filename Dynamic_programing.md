@@ -169,3 +169,49 @@ use dp, vector<bool> memo. from back to the start and check whether ecery node's
     
 }
  ````
+## NOT SOLVED YET, Leetcode 1027, longest arithmetic subsequence
+ * Problem: have to deal with duplicate element when using hashmap (key: value, value_type: index/position)
+ 
+ ````C++
+ //leetcode 1027 longest Aritmetic subsequence TODO
+int longestArithSeqLength(vector<int>& nums) {
+    if(nums.size() == 1 || nums.empty()) {return 0;}
+    /*
+    unordered_map<int,int> map;//record the number value and its corresponding location
+    for(int i = 0; i < nums.size();i++){
+        map[nums[i]] = i;
+    }*/
+    
+    //create memo
+    const size_t num_row = nums.size() ;
+    const size_t num_col = num_row;
+    vector<vector<int>> memo(num_row,vector<int>(num_col,2));
+    //base case is two because two number can directly form this sequence with length = 2
+    
+    int max = numeric_limits<int>::min();
+    
+    for(int i = 0;i < num_row;i++){
+        for(size_t j = i+1; j < num_col;j++){
+            //for each element
+            //we have two number nums[i] and nums[j]
+            //check whether we have 2*nums[i] - nums[j] in the nums
+            int find = find_index((2*nums[i] - nums[j]), i, nums);
+            
+            if(find != -1){
+                //get the index
+               
+                //get the new value
+                memo[i][j] = memo[find][i] + 1;
+            }
+            
+            if(max < memo[i][j]){max = memo[i][j];}
+        }
+    }
+    
+    return max;
+    
+
+    
+    
+}
+ ````
