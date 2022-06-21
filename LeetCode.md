@@ -266,4 +266,39 @@ void back_track(vector<string> &result,string cur, int num_L,int num_R, int size
     
 }
 ````
+## leetcode 1647 Minimum Deletions to make character counts unique
+* Idea : using hash_set to record whether there are same frequency before and if yes, we can delete the frequency and increment the num_deletion untill it becomes unique -> if frequency = 0, don't insert to hash_set , if frequency > 0, insert to hash_set
 
+````C++
+                int minDeletions(string s) {
+    vector<int> vec(26,0);
+    unordered_set<int> my_set;
+    for(auto &c : s){
+        ++vec[(c - 'a')];
+    }
+    
+    
+    int num_deletion = 0 ;
+    
+    for(auto & c :vec){
+        if(c == 0){continue;}
+        
+        int num = c;
+        
+        if(my_set.find(num) == my_set.end()){
+            my_set.insert(num);
+        }else{
+            //repeated , delete until it is unique
+            while(my_set.find(num) != my_set.end()){
+                num--;
+                num_deletion++;
+                if(num == 0){break;}
+            }
+            if(num != 0)
+                my_set.insert(num);
+        }
+    }
+    
+    return num_deletion;
+}
+````
