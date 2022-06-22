@@ -302,3 +302,33 @@ void back_track(vector<string> &result,string cur, int num_L,int num_R, int size
     return num_deletion;
 }
 ````
+## Leetcode 199 , Binary Tree Right Side View
+ 
+ `Idea`: * using level order traversal from right to left for each level, we always push the right node first into the queue, so that for each level, the first node out from the queue is the right-most node
+  
+ ````C++
+        queue<TreeNode*> my_q;
+    vector<int> ret;
+    if(root == nullptr){return vector<int>{};}
+    
+    my_q.push(root);
+    
+    while(!my_q.empty()){
+        size_t size = my_q.size();
+        
+        
+        for(int i = 0; i < size;i++){
+            //for each level the first one is right-most
+            //as we always push the right-most one first
+            auto this_node = my_q.front();
+            my_q.pop();
+            if(i == 0){ret.push_back(this_node->val);}
+            
+            if(this_node->right){my_q.push(this_node->right);}
+            if(this_node->left){my_q.push(this_node->left);}
+        }
+        
+        
+    }
+    return ret;
+ ````
