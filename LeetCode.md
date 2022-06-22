@@ -332,3 +332,45 @@ void back_track(vector<string> &result,string cur, int num_L,int num_R, int size
     }
     return ret;
  ````
+        
+ ## Leetcode 663 Equal Tree Partition
+ `Idea: `: using get total sum function for each node, and check whether there is a subtree's sum equals to half of the total sum.
+        if total sum is odd, it is not possible to find the solution, thus we return false;
+ ````C++
+         void get_sum(TreeNode *start_node, int & sum){
+        if(!start_node){return;}
+        sum+=start_node->val;
+        get_sum(start_node->left,sum);
+        get_sum(start_node->right,sum);
+    }
+    
+    bool bfs(TreeNode *root, int &target){
+        
+        int sum1 = 0;
+        if(!root){return false;}
+        if(!root->right && !root->left){return false;}
+        
+        if(root->left){
+            sum1 = 0;
+            get_sum(root->left,sum1);
+            if(sum1 == target){return true;}
+        }
+        if(root->right){
+            sum1 = 0;
+            get_sum(root->right,sum1);
+            if(sum1 == target){return true;}
+        }
+        
+        return bfs(root->left,target) || bfs(root->right,target);
+    }
+    
+    bool checkEqualTree(TreeNode* root) {
+        int sum = 0;
+        get_sum(root,sum);
+        if(sum %2 != 0){return false;}
+        
+        int target = sum/2;
+        
+        return bfs(root,target);
+    }
+ ````
