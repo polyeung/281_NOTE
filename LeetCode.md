@@ -376,10 +376,11 @@ void back_track(vector<string> &result,string cur, int num_L,int num_R, int size
  ````
 
 ## Leetcode 699 Trim Binary Search Tree
-`IDEA: ` 1. if the node is smaller than the low value, directly drop leftTree of this node(must be smaller), run recersive on right sub tree
-         2.if the node is larger than the high value, directly drop rightTree of this node(must be larger), run recersive on left sub tree
-         3. if this node is valid, left pointer points to the result of recursion on left subtree, vice versa
-         4. intuitively, this function check from the bottom of tree to top, and drop invalid subtree while throwing up the valid trees
+`IDEA: ` 
+1. if the node is smaller than the low value, directly drop leftTree of this node(must be smaller), run recersive on right sub tree
+2. if the node is larger than the high value, directly drop rightTree of this node(must be larger), run recersive on left sub tree
+3. if this node is valid, left pointer points to the result of recursion on left subtree, vice versa
+4. intuitively, this function check from the bottom of tree to top, and drop invalid subtree while throwing up the valid trees
 ````C++
 TreeNode* trimBST(TreeNode* root, int low, int high) {
         if(!root){return nullptr;}
