@@ -176,11 +176,11 @@ use dp, vector<bool> memo. from back to the start and check whether ecery node's
  //leetcode 1027 longest Aritmetic subsequence TODO
 int longestArithSeqLength(vector<int>& nums) {
     if(nums.size() == 1 || nums.empty()) {return 0;}
-    /*
+    
     unordered_map<int,int> map;//record the number value and its corresponding location
     for(int i = 0; i < nums.size();i++){
         map[nums[i]] = i;
-    }*/
+    }
     
     //create memo
     const size_t num_row = nums.size() ;
@@ -190,18 +190,17 @@ int longestArithSeqLength(vector<int>& nums) {
     
     int max = numeric_limits<int>::min();
     
-    for(int i = 0;i < num_row;i++){
+    for(size_t i = 0;i < num_row;i++){
         for(size_t j = i+1; j < num_col;j++){
             //for each element
             //we have two number nums[i] and nums[j]
             //check whether we have 2*nums[i] - nums[j] in the nums
-            int find = find_index((2*nums[i] - nums[j]), i, nums);
-            
-            if(find != -1){
+            auto find = map.find(2*nums[i] - nums[j]);
+            if(find != map.end()){
                 //get the index
-               
+                int index = find->second;
                 //get the new value
-                memo[i][j] = memo[find][i] + 1;
+                memo[i][j] = memo[index][i] + 1;
             }
             
             if(max < memo[i][j]){max = memo[i][j];}
@@ -209,10 +208,7 @@ int longestArithSeqLength(vector<int>& nums) {
     }
     
     return max;
-    
-
-    
-    
+  
 }
                                     
 ````
