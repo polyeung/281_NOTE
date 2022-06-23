@@ -6,7 +6,7 @@
 * map will sort the container in key's increasing order by default
 * we can not determine the sequence of traversal of unordered_map as we don't know the hash function and structure under the hood
 * insertion of hash table has to be insert pairs, only insert key type will fail the insertion
-*  `disadcantage of quadratic probing`
+*  `disadvantage of quadratic probing`
     1. two elements that hash to the same position will still have the same probe sequence, regardless of how far they land from their hashed location
     2. depending on the size of the hash table involved, it is possible for quadratic probing to never consider specific indices while searching for an open position
     3.the performance of quadratic probing can deteriorate dramatically as the load factor increases
