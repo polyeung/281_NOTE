@@ -401,3 +401,36 @@ TreeNode* trimBST(TreeNode* root, int low, int high) {
     }
         
 ````
+## Leetcode 77 Combinations : Backtracking problem
+
+![IMG_FF17CB19A8F3-1](https://user-images.githubusercontent.com/81163933/175179968-5879e561-b794-4d08-a651-e89e8571a02f.jpeg)
+
+`Idea`:
+1. drawing decesion tree for backtracking problems is pretty helpful
+2. pay attention to the for loop , pattern is quite similar to the genperm function, whenever you insert one new value and call recursively, you have to undo the changes and try new value, `this is the key of backtracking: try every combinations/ possibility`
+3. basecase put at the top
+````C++
+        void back_track(vector<vector<int>> &result,vector<int> cur_vec,int start, int end, int size){
+    if(cur_vec.size() == size){
+        result.push_back(cur_vec);
+        return;
+    }
+    
+    //for each layer, push one number range from start to end
+    //and do recursive call
+    for(int i = start;i < end+1;i++){
+        cur_vec.push_back(i);    // |
+                                 /* V set start to i+1, maintain increasing sequence*/
+        back_track(result,cur_vec,i+1,end,size);
+        cur_vec.pop_back();/*make sure we only insert one num, try different combination*/
+    }
+ 
+    
+}
+vector<vector<int>> combine(int n, int k) {
+    vector<vector<int>> result{};
+    vector<int> cur_vec{};
+    back_track(result,cur_vec,1,n,k);
+    return result;
+}
+````
