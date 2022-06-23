@@ -299,5 +299,55 @@ dist[r][c] = dist[current.first][current.second] + 1;
 return dist;
 }
  ````
+ ## covid shortest path problem
  
+ <img width="800" alt="image" src="https://user-images.githubusercontent.com/81163933/175328429-874fb4cd-7a4b-4d8d-af9f-030926b5d4fe.png">
+
+ 
+ 
+ 
+ `Idea: `
+ * for each element consider left right up element,
+ * tricky part is that you can set a default path that for each column, it just go straignt down,
+ * in second nested for loop, you still need to consider the choice coming from the element above.
+ 
+ ````C++
+ int my_covid_travel(vector<vector<int>> &grid){
+    vector<vector<int>> memo(grid.size(),vector<int>(grid[0].size(),0));
+    
+    for(int i = 0;i < grid.size();i++){
+        for(int j = 0;j < grid[0].size();j++){
+            if(i == 0){memo[i][j] = grid[i][j];}
+            else{
+                memo[i][j] = grid[i][j] + memo[i-1][j];
+            }
+        }
+    }
+    for(int i = 1;i < grid.size();i++){
+        for(int j = 0;j < grid[0].size();j++){
+            if(j == 0){
+                memo[i][j] = min(grid[i][j] + memo[i][j+1],memo[i][j]);
+                
+            }
+            
+            else if(j == grid.size() - 1){
+                memo[i][j] = min(grid[i][j] + memo[i][j-1],memo[i][j]);
+            }
+            
+            else{
+                memo[i][j] = min({grid[i][j] + memo[i][j-1],memo[i][j],grid[i][j] + memo[i][j+1]});
+            }
+            
+            memo[i][j] = min(memo[i-1][j]+grid[i][j],memo[i][j]);
+        }
+    }
+    
+    int min_r = numeric_limits<int>::max();
+    for(auto &s: memo[memo.size()-1]){
+        min_r = min(min_r,s);
+    }
+    
+    return min_r;
+}
+ ````
                       
