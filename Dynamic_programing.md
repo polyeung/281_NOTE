@@ -1,9 +1,11 @@
 ## DYNAMIC PROGRAMMING SUMMARY
 memo| problem | recurence relation (pattern) | explanation
 --- | --- | --- | ---
-1D vector | climbing stairs/AVL min num_nodes|H(n) = H(n-1) + H(n-2) | depend on previous steps decision, moving is one direction
-1D vector | can jump/jump game | either from front of back, | update the value of each element based on consecutive element and this element.
-2D vector |throw dice | |
+1D vector | climbing stairs/AVL min num_nodes|`check neighbour`H(n) = H(n-1) + H(n-2) | depend on previous steps decision, moving is one direction
+1D vector | can jump/jump game | one pass, H(i) = max(H(i-1),H(i-2),H(i-3)) | update the value of each element based on consecutive element and this element.
+2D vector |throw dice/ napsack problem/  | `check reachable elements eg. capacity of bag, #faces of dice`H(i)(j) = max(from H(i-1)(j - val) to H(i-1)(j-1))|for each element, go up and go left or right by certain distance to fetch the value 
+2D vector |edit distance / nearest zero| `check neighbour`H(i)(j) = H(i-1)(j-1)+ H(i-1)(j)| use the neighbour values to update current element
+
 
 
 
