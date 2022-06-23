@@ -1,3 +1,13 @@
+## DYNAMIC PROGRAMMING SUMMARY
+memo| problem | recurence relation (pattern) | explanation
+--- | --- | --- | ---
+1D vector | climbing stairs/AVL min num_nodes|H(n) = H(n-1) + H(n-2) | depend on previous steps decision, moving is one direction
+1D vector | can jump/jump game | either from front of back, | update the value of each element based on consecutive element and this element.
+2D vector |throw dice | |
+
+
+
+
 ## climbing stairs, Leetcode 70
 ````C++
  int climbStairs(int n) {
@@ -72,7 +82,7 @@ use dp, vector<bool> memo. from back to the start and check whether ecery node's
     return lastGoodIndex == 0;
  ````                           
 
- `//leetcode 1155 throw dice to target sum`
+## leetcode 1155 throw dice to target sum`
  
  #### memo (suppose 6 faces)
  sum | 1 | 2 | 3 | 4 |5 |6 |7 |8
