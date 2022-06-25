@@ -409,8 +409,9 @@ TreeNode* trimBST(TreeNode* root, int low, int high) {
 1. drawing decesion tree for backtracking problems is pretty helpful
 2. pay attention to the for loop , pattern is quite similar to the genperm function, whenever you insert one new value and call recursively, you have to undo the changes and try new value, `this is the key of backtracking: try every combinations/ possibility`
 3. basecase put at the top
+        
 ````C++
-        void back_track(vector<vector<int>> &result,vector<int> cur_vec,int start, int end, int size){
+void back_track(vector<vector<int>> &result,vector<int> cur_vec,int start, int end, int size){
     if(cur_vec.size() == size){
         result.push_back(cur_vec);
         return;
@@ -433,4 +434,47 @@ vector<vector<int>> combine(int n, int k) {
     back_track(result,cur_vec,1,n,k);
     return result;
 }
+````
+        
+        
+## Leetcode 17 phone number combination
+'IDEA: '
+* use hash map to store the digits number and its corresponding string
+* use backtracking to print out the combination
+* for backtracking, key is to use index to serve as the permutation length.
+* for each index, we need to find the digits number and its corresponding string(using map), and loop through that string to try different combination.
+        
+![IMG_7FDBA984AC82-1](https://user-images.githubusercontent.com/81163933/175774154-13b92865-a9b1-42ab-81f3-c1c673413204.jpeg)
+````C++
+void back_track(vector<string> &ret,string cur_str,int sz,int index, string &digits){
+        //base case
+       if(cur_str.size() == sz){
+           ret.push_back(cur_str);
+           return;
+       }
+       
+       string str = my_map[digits[index] - '0'];
+       
+       //for this func loop through all the character of str
+       for(int i = 0; i < str.size();i++){
+           cur_str += str[i];
+           
+           back_track(ret, cur_str,sz,index + 1, digits);
+           
+           cur_str.pop_back();
+       }
+     
+       
+    }
+    
+    vector<string> letterCombinations(string digits) {
+        if(digits.empty()){return vector<string>{};}
+        set_map();
+        vector<string> ret;
+      
+        back_track(ret,"",int(digits.size()),0,digits);
+        
+        return ret;
+   
+    }
 ````
