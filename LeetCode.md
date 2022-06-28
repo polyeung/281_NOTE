@@ -478,3 +478,27 @@ void back_track(vector<string> &ret,string cur_str,int sz,int index, string &dig
    
     }
 ````
+## Leetcode 53 maximum contigous subarray
+`Idea: `
+1. using max_sum to record current best
+2. whenever curSum is `negative` reset it
+3. using cur_sum to record the contigous sum
+4. cur_sum is in the idea of linear scaning and thus can make sure that the result is determined from contigous array
+````C++
+int maxSubArray(vector<int>& nums) {
+         if(nums.empty()){return 0;}
+    
+    int curSum = 0;
+    int max_sum = nums[0];
+    
+    for(auto & n : nums){
+        if(curSum < 0){
+            curSum = 0;
+        }
+        curSum += n;
+        max_sum = max(curSum,max_sum);
+    }
+    
+    return max_sum;
+    }
+````
