@@ -502,3 +502,45 @@ int maxSubArray(vector<int>& nums) {
     return max_sum;
     }
 ````
+## Leetcode 39, combinational sum
+`Idea` 
+ 1. backtracking
+ 2. allow duplicate elements/ multiple use, try index first , not work, then pop it, try next index,
+ 3. TODO : Draw the decision tree
+ ````C++
+ void back_track(vector<vector<int>> &ret, vector<int> cur_vec,int &target,int index,vector<int>& candidates){
+        if(index >= candidates.size()){return;}
+    
+       //base case
+       if(!cur_vec.empty()){
+           int sum = accumulate(cur_vec.begin(),cur_vec.end(),0);
+           if(sum == target){
+               ret.push_back(cur_vec);
+               return;
+           }
+           
+           //not possible
+           if(sum > target){return;}
+          
+       }
+       
+       
+            cur_vec.push_back(candidates[index]);
+            back_track(ret,cur_vec,target,index,candidates);
+            cur_vec.pop_back();
+        back_track(ret,cur_vec,target,index + 1, candidates);
+           
+       
+       
+  
+   }
+   
+   
+   vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+       if(candidates.empty()){return vector<vector<int>>{};}
+       
+       vector<vector<int>> ret;
+       back_track(ret,vector<int>{},target,0,candidates);
+       return ret;
+   }
+ ````
