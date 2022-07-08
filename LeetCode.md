@@ -544,3 +544,90 @@ int maxSubArray(vector<int>& nums) {
        return ret;
    }
  ````
+
+## 863 All nodes distance k in binary tree
+`Idea:`
+ 1. usig map to record parent of each child
+ 2. so that we can turn tree to undirected graph and do BFS
+````C++
+        void init_map(TreeNode* root){
+        if(!root){
+            //leaf
+            return;
+        }
+        
+        init_map(root->left);
+        //visit node
+        if(root->left){my_map[root->left] = root; }
+        if(root->right){my_map[root->right] = root;}
+        init_map(root->right);
+    }
+    
+    
+    vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
+        if(!root || !target){return vector<int>{};}
+        //initialize map
+        auto head = root;
+        init_map(head);
+        
+        
+        vector<int> ret;
+        //doing bfs
+        queue<TreeNode*> my_q;
+        my_q.push(target);
+        unordered_set<TreeNode*> visited;
+        int dist = 0;
+        while(!my_q.empty()){
+            size_t layer_size = my_q.size();
+            for(size_t i = 0; i < layer_size;i++){
+                auto this_node = my_q.front();
+                if(visited.find(this_node) != visited.end()){continue;}
+                visited.insert(this_node);
+                //cout << "Node visited: " << this_node->val << endl;
+                my_q.pop();
+                
+                if(dist == k){
+                    ret.push_back(this_node->val);
+                }
+                
+                // add adjacent node
+               
+                //left
+                if(this_node->left && visited.find(this_node->left) == visited.end()){
+                    my_q.push(this_node->left);
+                    
+                }
+                
+                //right
+                if(this_node->right && visited.find(this_node->right) == visited.end()){
+                    my_q.push(this_node->right);
+                    
+                }
+                
+                //parent
+                
+                if(my_map.find(this_node) != my_map.end() 
+                   && visited.find(my_map[this_node]) == visited.end()){
+                    
+                    my_q.push(my_map[this_node]);
+                    //cout << "pushing parent : " << my_map[this_node]->val <<endl;
+                   
+                }
+                
+                
+            }
+            if(dist == k){return ret;}
+            
+            dist++;
+            
+        }
+        
+        
+        return ret;
+        
+    }
+private:
+    unordered_map<TreeNode*,TreeNode*> my_map;
+    //record the node and its parent
+    //child | parent
+````
