@@ -350,4 +350,36 @@ return dist;
     return min_r;
 }
  ````
-                      
+
+## Leetcode 139 : word break
+
+`Idea`: 
+ 1. bottom up solution
+ 2. index i to mark the starting point of check point
+ 3. for each i position of string s, check all words in wordDict and see whether there is a string can match
+ 4. if match, memo[i] = memo[i + word.size()] , (recurence relation, because you need to check after you match this string, can the string starting at i+word.size() also match? )
+ 
+ 
+````C++
+ bool wordBreak(string s, vector<string>& wordDict) {
+        vector<bool> memo(s.size()+1,false);
+    
+    memo[s.size()] = true;
+    for(int i = static_cast<int>(s.size()-1);i >= 0;--i){
+        for(auto &word : wordDict){
+            if(s.size() - i < word.size()){
+                //size not match
+                continue;
+            }
+            if(s.substr(i,word.size()) == word){
+                 memo[i] = memo[i + word.size()];
+            }
+            
+            if(memo[i]){break;}
+            
+        }
+    }
+    
+    return memo[0];
+    }
+````
