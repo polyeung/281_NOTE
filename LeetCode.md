@@ -714,3 +714,59 @@ Idea : using unordered_set
         return true;
     }
 ````
+## Leetcode 75 sort 0,1,2
+ Idea : 
+ 1. three pointers method
+ 2. one pointer points to the right most position of 0
+ 3. second cur pointer pointing to the current elemnt
+ 4. third pointer pointing to the left most position of 2
+ 5. doing in one pass
+ 6. using swap
+ ````C++
+void print_help_sort(int &a, int& cur, int &b, vector<int> &nums){
+    cout << "printing ... \n";
+    for(auto & i : nums){cout << i << " ";}
+    cout << "\n";
+    for(int i = 0; i < cur ; i ++){
+        cout <<"  ";
+    }
+    cout << "^ cur"<<endl;;
+    for(int i = 0; i < a ; i ++){
+        cout <<"  ";
+    }
+    cout << "^ a"<<endl;;
+    
+    for(int i = 0; i < b ; i ++){
+        cout <<"  ";
+    }
+    cout << "^ b"<<endl;;
+    cout << endl;
+}
+void sortColors(vector<int>& nums) {
+            // 0 goes to left most
+            // 1 goes to the middle
+            // 2 goes to the rightmost
+        
+        //doing in one pass
+        int a = 0; // right most boundary of 0
+        int b = nums.size() - 1; // leftmost boundary of 2
+        int cur = 0;
+        print_help_sort(a, cur, b, nums);
+        while(cur <= b){
+            if(nums[cur] == 0){
+                //change with the left most
+                swap(nums[cur++],nums[a++]);
+            }else if(nums[cur] == 1){
+                cur++;
+            }else{
+                swap(nums[cur],nums[b--]);
+            }
+            
+            print_help_sort(a, cur, b, nums);
+            
+        }//while
+        
+    
+    return;
+}
+````
