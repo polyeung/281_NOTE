@@ -770,3 +770,28 @@ void sortColors(vector<int>& nums) {
     return;
 }
 ````
+## Leetcode 111 minimum depth in binary tree
+1. recursive method ,pretty slow :(
+````C++
+     void helper(int & best, int cur_depth, TreeNode *root){
+        //base case
+        if(!root){return;}
+        cur_depth++;
+        if(!root->left && !root->right){best = min(best,cur_depth);return;}
+        
+        
+        
+        helper(best,cur_depth,root->left);
+        helper(best,cur_depth,root->right);
+        
+        }
+    int minDepth(TreeNode* root) {
+        if(!root){return 0;}
+        
+        int best = numeric_limits<int>::max();
+        helper(best,0,root);
+        
+        return best;
+        
+    }                  
+````
