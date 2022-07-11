@@ -636,7 +636,23 @@ Idea :
 1. flip on the diagonal 
 2. reverse each row
 ````C++
+    void rotate(vector<vector<int>>& matrix) {
+        //flip on the diagonal 
+        for(int i = 0; i < matrix.size();++i){
+            for(int j = i; j < matrix[i].size();++j){
+                if(i == j){continue;}
+                swap(matrix[i][j],matrix[j][i]);
+            }//for
+        }//for
         
+        
+        //reverse each row of vector
+        for(auto &vec :matrix){
+            reverse(vec.begin(),vec.end());
+        }
+        
+        
+    }    
 ````
 ## Leetcode 36 valid sudoku
 Idea : using unordered_set
