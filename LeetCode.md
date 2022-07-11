@@ -772,6 +772,7 @@ void sortColors(vector<int>& nums) {
 ````
 ## Leetcode 111 minimum depth in binary tree
 1. recursive method ,pretty slow :(
+2. visite each node exactly once, so O(N), N
 ````C++
      void helper(int & best, int cur_depth, TreeNode *root){
         //base case
