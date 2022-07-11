@@ -631,3 +631,70 @@ private:
     //record the node and its parent
     //child | parent
 ````
+## Leetcode 48 ,rotate image
+Idea :
+1. flip on the diagonal 
+2. reverse each row
+````C++
+        
+````
+## Leetcode 36 valid sudoku
+Idea : using unordered_set
+````C++
+        bool check_square(int row, int col,vector<vector<char>>& board ){
+        //check row
+        unordered_set<int> element;
+        for(int i = row; i< row+3;++i){
+            
+            for(int j = col; j <col+3;++j){
+                if(board[i][j] == '.'){continue;}
+                
+                int num = board[i][j] - '0';
+                if( num < 1 || num > 9){return false;}
+                if(element.find(num) != element.end()){return false;}
+                element.insert(num);
+            }
+        
+    }
+        return true;
+    }
+    
+    
+    
+    bool isValidSudoku(vector<vector<char>>& board) {
+        //check row
+        for(int i = 0; i<board.size();++i){
+            unordered_set<int> element;
+            for(int j = 0; j < board[i].size();++j){
+                if(board[i][j] == '.'){continue;}
+                
+                int num = (board[i][j] - '0');
+                if( num < 1 || num > 9){return false;}
+                if(element.find(num) != element.end()){return false;}
+                element.insert(num);
+            }
+        }
+        
+        //check column
+        for(int i = 0; i< 9;++i){
+            unordered_set<int> element;
+            for(int j = 0; j < board[i].size();++j){
+                if(board[j][i] == '.'){continue;}
+                
+                int num = board[j][i] - '0';
+                if( num < 1 || num > 9){return false;}
+                if(element.find(num) != element.end()){return false;}
+                element.insert(num);
+            }
+        }
+        
+        //check square
+        for(int i = 0; i < 9; i+=3){
+            for(int j =0; j < 9;j += 3){
+                if(!check_square(i,j,board)){return false;}
+            }
+        }
+        
+        return true;
+    }
+````
