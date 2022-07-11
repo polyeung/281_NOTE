@@ -796,3 +796,72 @@ void sortColors(vector<int>& nums) {
         
     }                  
 ````
+## Leetcode 54 Spiral Matrix
+Idea : 
+1. have four directions: going left, right, up, down
+2. after each move, shrink the boundary
+3, key: keep track of how many items added to the vector, and terminate the loop
+````C++
+        vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        
+            if(matrix.empty()){return vector<int>{};}
+        //change boundary every time we finish one row or one column
+        pair<int,int> cur = {0,0};
+    int all = 0;
+    for(auto & i : matrix){all += i.size();}
+        int up_bound = 0;
+        int low_bound = matrix.size() - 1;
+        int left_bound = 0;
+        int right_bound = matrix[0].size() - 1;
+        //0 right, 1 down , 2 left, 3 up
+        int dict = 0;
+        vector<int> ret;
+   
+        while(ret.size() != all ){
+            if(dict == 0){
+                //go right
+                for(int j = left_bound; j <= right_bound;++j){
+                    ret.push_back(matrix[cur.first][j]);
+                }
+                cur = {cur.first,right_bound};
+                up_bound ++;
+                dict = 1;
+                
+            }else if(dict ==1){
+                //go down
+                
+                for(int i = up_bound; i <= low_bound; ++i){
+                    ret.push_back(matrix[i][cur.second]);
+                    
+                }
+                cur = {low_bound,cur.second};
+                right_bound --;
+                dict = 2;
+            }else if(dict == 2){
+                //go left
+                
+                for(int col = right_bound; col >= left_bound;--col){
+                    ret.push_back(matrix[cur.first][col]);
+                    
+                }
+                low_bound--;
+                dict = 3;
+                cur = {cur.first,left_bound};
+            }else{
+                //go up
+                
+                for(int row = low_bound;row >= up_bound;--row){
+                    ret.push_back(matrix[row][cur.second]);
+                    
+                }
+                
+                left_bound++;
+                dict = 0;
+                cur = {up_bound,cur.second};
+            }
+        }
+        return ret;
+        
+        
+    }
+````
