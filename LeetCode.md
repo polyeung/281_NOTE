@@ -865,3 +865,42 @@ Idea :
         
     }
 ````
+## Leetcode 314 vertical traversal of the binary tree
+`Idea`
+ 1. using bfs to maintain row order
+ 2. using map to record column number and its corresponding vector of value
+ 3. using map because it is automatically sorted by key order, which maintains the column sequence
+````C++
+vector<vector<int>> verticalOrder(TreeNode* root) {
+        if(!root){return vector<vector<int>>{};}
+        //using map to <col, vector<int>>;
+        
+        map<int,vector<int>> my_map;
+        
+        queue<pair<int,TreeNode*>> my_q; // pair{col, TreeNode*};
+        //bfs will garantee that we read each column from up to bottom
+        
+        //set the col number of root to be 0
+        my_q.push({0,root});
+        
+        while(!my_q.empty()){
+            int layer_size = my_q.size();
+            for(int i = 0; i < layer_size; ++i){
+                auto node = my_q.front();
+                my_q.pop();
+                int col = node.first;
+                //push to map
+                my_map[col].push_back((node.second)->val);
+                //push its child
+                if(node.second->left){my_q.push({col-1,node.second->left});}
+                if(node.second->right){my_q.push({col+1,node.second->right});}
+                
+            }//for
+        }//while
+        
+        vector<vector<int>> ret;
+        for(auto & i : my_map){ret.push_back(i.second);}
+        return ret;
+    }
+};
+````
