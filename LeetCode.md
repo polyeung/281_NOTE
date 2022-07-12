@@ -904,3 +904,66 @@ vector<vector<int>> verticalOrder(TreeNode* root) {
     }
 };
 ````
+## leetcode 79 word search
+Idea : 
+1. identify this as the backtracking problem
+2. this is majorly backtracking as it will try the sub-possibility of certain route when that route does not work out
+   this is different from whole dfs method where the route is tottaly abandoned then that route fail to be the answer
+3. pruning method: get me a little little bit faster: check whether all characters in target word do appear in the board
+4. Complexity ? 
+5. also need to mark visited items and undo changes to the board(back tracking characteristics)
+        
+````C++
+        /leetcode 79, word search and dfs
+//index mark the
+//Idea: this is finding whether the path exists so we don't need a cur_word variable to store the word
+
+bool back_track(vector<vector<char>>& board,int row,int col, int index,string &word){
+    //base case
+    if(index >= word.length())
+        return true;
+    
+    //check boundary
+    if(row < 0 || col < 0 || row >= board.size() || col >= board[row].size())
+        return false;
+    
+    
+    //check this index
+    if(board[row][col] != word[index])
+        return false;
+    
+    //mark this as visited
+    //using whatever character that is not an alphabet
+    board[row][col] = '*';
+    
+                            //right left down up
+    vector<int> col_offset = {0, 0, 1, -1};
+    vector<int> row_offset = {1, -1, 0, 0};
+    bool flag = false;
+    
+    for(int i = 0; i < 4; ++i){
+        flag = back_track(board, row + row_offset[i], col + col_offset[i], index+1, word);
+        if(flag){return true;}
+    }
+    
+    //after doing for loop we need to recover the board
+    board[row][col] = word[index];
+    
+    return flag;
+    
+}
+    
+bool exist(vector<vector<char>>& board, string word) {
+        
+    for(int i = 0;i < board.size();++i){
+        for(int j = 0;j < board[i].size();++j){
+            bool flag = back_track(board,i,j,0,word);
+            if(flag){return true;}
+        }
+    }
+    
+    return false;
+        
+        
+}
+````
