@@ -967,3 +967,31 @@ bool exist(vector<vector<char>>& board, string word) {
         
 }
 ````
+        
+## leetcode 378 kth smallest element in the matrix
+`Method 1 : ` 
+using heap , deafault: max heap, need to count the size of the matrix(`not matrix.size() !`)
+       
+ ````C++
+int kthSmallest(vector<vector<int>>& matrix, int k) {
+        priority_queue<int> pq;
+        int SIZE = 0;
+    for(auto & i : matrix){
+        SIZE += i.size();
+        for(auto &num: i){
+            pq.push(num);
+        }
+    }
+        
+    k = SIZE - k;
+    for(int i = 0; i < k  ; ++i){
+        pq.pop();
+    }
+        
+        return pq.top();
+    }
+ 
+````
+ 
+                        
+                       
