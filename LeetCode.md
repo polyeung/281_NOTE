@@ -993,5 +993,71 @@ int kthSmallest(vector<vector<int>>& matrix, int k) {
  
 ````
  
+## Leetcode 15 3sum
+
+#### Method 1 : brute force, O(n^3)
+#### Method 2 : O(n^2)
+1. sort the vector to group all duplicate elements together
+2. really need to pay atterntion to get rid of duplicate elements
+   we can get rid of that by moving the index whenever there are duplicates elements adjacent to it
+ ````C++
+    //key : update low, get rid of duplicate
+                        while(low < high && nums[low] == nums[low+1]){low++;}
+                        while(low < high && nums[high] == nums[high-1]){high--;}                    
+ ````
+
+ we can also use a set, every time we insert the vector to that set, and get rid od duplicate,
+
+
+  ````C++
+    vector<vector<int>> threeSum(vector<int>& nums) {
+       vector<vector<int>> ret;
+        
+        //key: sort it!
+        //advantage is that: you can group the duplicates element together
+        sort(nums.begin(),nums.end());
+        
+        for(int i = 0;i < nums.size() - 2;++i){
+            
+            if(i == 0 || nums[i] != nums[i - 1]){
+                int target_sum = 0 - nums[i];
+                
+                int low = i + 1;
+                int high = nums.size() -1 ;
+                
+                while(low < high){
+                    if(nums[low] + nums[high] < target_sum){
+                        low++;
+                    }else if(nums[low] + nums[high] > target_sum){
+                        high--;
+                    }else{
+                        vector<int> cur_vec;
+                        cur_vec.push_back(nums[i]);
+                        cur_vec.push_back(nums[low]);
+                        cur_vec.push_back(nums[high]);
+                        ret.push_back(cur_vec);
                         
+                        //key : update low, get rid of duplicate
+                        while(low < high && nums[low] == nums[low+1]){low++;}
+                        while(low < high && nums[high] == nums[high-1]){high--;}
+                        low++;
+                        high--;
+                    }
+                    
+                }//while
+        
+                
+            }//if, get rid of duplicate vector
+         
+            //-2,0,0,2,2
+            
+        }
+        
+        return ret;
+        
+        
+        
+        
+    }                                     
+  ````
                        
