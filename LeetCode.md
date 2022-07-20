@@ -1060,4 +1060,57 @@ int kthSmallest(vector<vector<int>>& matrix, int k) {
         
     }                                     
   ````
+ ## leetcode 323 connected component
+ `Idea : `
+ 1. using union find
+ ````C++
+        class Solution {
+public:
+    vector<int> points;
+    
+    int find_set(int & a){
+          //find the representative of vertics a
+          if(points[a] == a){
+              return a;
+          }
+        
+          
+          return find_set(points[a]);
+      }
+        
+      void union_two_points(int & a, int &b){
+          int rep_of_a = find_set(a);
+          int rep_of_b = find_set(b);
+          
+          if(rep_of_a == rep_of_b){
+              //already union
+              return;
+          }
+          
+          //union it
+          points[rep_of_a] = rep_of_b;
+          return;
+      }
+     int count_components(){
+            int count = 0;
+            for(int i = 0;i < points.size();++i){
+                if(points[i] == i){count ++;}
+            }
+            
+            return count;
+        }
+    int countComponents(int n, vector<vector<int>>& edges) {
+       const size_t SIZE = n;
+        points.resize(SIZE);
+        
+        for(int i = 0;i < n;++i){points[i] = i;}
+        
+        for(auto &e : edges){union_two_points(e[0],e[1]);}
+        /*
+        for(int i=0;i < points.size();++i){
+            cout << i << " rep : "<<points[i] << endl;
+        }*/
+        return count_components();
+    }
+ ````
                        
